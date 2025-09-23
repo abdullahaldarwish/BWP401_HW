@@ -11,7 +11,7 @@ function validateField(event) {
   field.classList.remove("is-valid", "is-invalid");
 
   if (field.id === "email") {
-    if (value === "" || !value.contains("@")) {
+    if (value === "" || !value.includes("@")) {
       field.classList.add("is-invalid");
     } else {
       field.classList.add("is-valid");
