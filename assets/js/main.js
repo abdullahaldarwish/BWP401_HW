@@ -1,6 +1,6 @@
-document.getElementById("name").addEventListener("blur", validateField);
-document.getElementById("email").addEventListener("blur", validateField);
-document.getElementById("message").addEventListener("blur", validateField);
+document.getElementById("name")?.addEventListener("blur", validateField);
+document.getElementById("email")?.addEventListener("blur", validateField);
+document.getElementById("message")?.addEventListener("blur", validateField);
 
 // التحقق من حقل واحد
 function validateField(event) {
@@ -78,3 +78,15 @@ function resetForm() {
   document.getElementById("successAlert").classList.add("d-none");
   document.getElementById("errorAlert").classList.add("d-none");
 }
+// منطق زر الرفع للأعلى
+document.addEventListener("DOMContentLoaded", () => {
+  const scrollBtn = document.getElementById("scrollTopBtn");
+  if (scrollBtn) {
+    scrollBtn.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    });
+  }
+});
