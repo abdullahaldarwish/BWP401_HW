@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> تواصل معنا</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" href="./assets/css/style.css">
+
+</head>
+
+<body>
+    <!-- شريط التنقل -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" aria-label="شريط التنقل الرئيسي">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <i class="bi bi-calendar-event ms-2"></i> فعاليات سورية
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                aria-controls="offcanvasNavbar" aria-label="تبديل التنقل">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar"
+                aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
+                        <i class="bi bi-calendar-event me-2"></i> فعاليات سورية
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="home.html">
+                                <i class="bi bi-house-door me-1"></i> الرئيسية
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="events.html">
+                                <i class="bi bi-calendar3 me-1"></i> الفعاليات
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">
+                                <i class="bi bi-info-circle me-1"></i> من نحن
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="contact.html">
+                                <i class="bi bi-telephone me-1"></i> تواصل معنا
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- قسم الرئيسي -->
+    <section class="about-hero">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h1 class="display-4 fw-bold mb-4">تواصل معنا</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم تواصل معنا -->
+    <section class="contact-section">
+        <div class="container">     
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h2 class="section-title">ابق على تواصل</h2>
+                    <p>هل لديك أسئلة أو تريد التواصل؟ يمكنك الوصول إلينا عبر أي من هذه القنوات:</p>
+
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="bi bi-envelope-fill"></i>
+                            </div>
+                            <a href="mailto:info@syriaevents.sy">info@syriaevents.sy</a>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="bi bi-telephone-fill"></i>
+                            </div>
+                            <a href="tel:+963944789456">963-999-999999+</a>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="bi bi-geo-alt-fill"></i>
+                            </div>
+                            <span>دمشق - ساحة الحافظة، بناية رقم 12</span>
+                        </div>
+                    </div>
+
+                    <div class="social-media">
+                        <h3>تابعنا على وسائل التواصل</h3>
+                        <div class="social-links">
+                            <a href="#" class="social-icon" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                            <a href="#" class="social-icon" aria-label="Twitter"><i class="bi bi-twitter"></i></a>
+                            <a href="#" class="social-icon" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                            <a href="#" class="social-icon" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <h2 class="section-title">أرسل لنا رسالة</h2>
+                    <form id="contactForm" novalidate>
+                        <div class="form-group">
+                            <label for="name">الاسم الكامل</label>
+                            <input type="text" id="name" name="name" required placeholder="أدخل اسمك الكامل">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">البريد الإلكتروني</label>
+                            <input type="email" id="email" name="email" required placeholder="example@email.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">الرسالة</label>
+                            <textarea id="message" name="message" rows="5" required placeholder="اكتب رسالتك هنا..."></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">إرسال الرسالة</button>
+                    </form>
+                    <div id="formStatus" class="form-status"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- التذييل  -->
+    <footer class="py-5 bg-dark text-white">
+        <div class="container">
+            <div class="row g-4">
+                <!-- قسم الموقع -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="h-100 d-flex flex-column">
+                        <h5 class="mb-3 fw-bold d-flex align-items-center">
+                            <i class="bi bi-calendar-event ms-2"></i> فعاليات سورية
+                        </h5>
+                        <p class="text-light mb-4 flex-grow-1">اكتشف واحضر أفضل الفعاليات في مدينتك. من الحفلات
+                            الموسيقية إلى المؤتمرات، نحن نجعل مدينتك تتألق مع تجارب فريدة ولحظات لا تُنسى.</p>
+                        <div class="d-flex gap-3">
+                            <a href="#"
+                                class="btn btn-outline-light d-flex align-items-center justify-content-center rounded-circle"
+                                style="height:40px; width:40px" aria-label="Facebook">
+                                <i class="bi bi-facebook"></i>
+                            </a>
+                            <a href="#"
+                                class="btn btn-outline-light d-flex align-items-center justify-content-center rounded-circle"
+                                style="height:40px; width:40px" aria-label="Twitter">
+                                <i class="bi bi-twitter"></i>
+                            </a>
+                            <a href="#"
+                                class="btn btn-outline-light d-flex align-items-center justify-content-center rounded-circle"
+                                style="height:40px; width:40px" aria-label="Instagram">
+                                <i class="bi bi-instagram"></i>
+                            </a>
+                            <a href="#"
+                                class="btn btn-outline-light d-flex align-items-center justify-content-center rounded-circle"
+                                style="height:40px; width:40px" aria-label="LinkedIn">
+                                <i class="bi bi-linkedin"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- قسم الروابط السريعة -->
+                <div class="col-lg-2 col-md-3 col-sm-6">
+                    <h5 class="mb-3 fw-bold">روابط سريعة</h5>
+                    <ul class="nav flex-column p-0">
+                        <li class="nav-item mb-2">
+                            <a href="home.html" class="nav-link p-0 text-light d-flex align-items-center">
+                                <i class="bi bi-chevron-left me-1 small"></i> الرئيسية
+                            </a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a href="events.html" class="nav-link p-0 text-light d-flex align-items-center">
+                                <i class="bi bi-chevron-left me-1 small"></i> الفعاليات
+                            </a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a href="about.html" class="nav-link p-0 text-light d-flex align-items-center">
+                                <i class="bi bi-chevron-left me-1 small"></i> من نحن
+                            </a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a href="contact.html" class="nav-link p-0 text-light d-flex align-items-center">
+                                <i class="bi bi-chevron-left me-1 small"></i> تواصل معنا
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- قسم الأقسام -->
+                <div class="col-lg-2 col-md-3 col-sm-6">
+                    <h5 class="mb-3 fw-bold">الاقسام</h5>
+                    <ul class="nav flex-column p-0">
+                        <li class="nav-item mb-2">
+                            <a href="#" class="nav-link p-0 text-light d-flex align-items-center">
+                                <i class="bi bi-chevron-left me-1 small"></i> الرياضة
+                            </a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a href="#" class="nav-link p-0 text-light d-flex align-items-center">
+                                <i class="bi bi-chevron-left me-1 small"></i> الرسم
+                            </a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a href="#" class="nav-link p-0 text-light d-flex align-items-center">
+                                <i class="bi bi-chevron-left me-1 small"></i> الموسيقى
+                            </a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a href="#" class="nav-link p-0 text-light d-flex align-items-center">
+                                <i class="bi bi-chevron-left me-1 small"></i> التكنلوجيا
+                            </a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a href="#" class="nav-link p-0 text-light d-flex align-items-center">
+                                <i class="bi bi-chevron-left me-1 small"></i> ابداع
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- قسم تواصل معنا -->
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="mb-3 fw-bold">تواصل معنا</h5>
+                    <ul class="list-unstyled p-0">
+                        <li class="mb-3 d-flex align-items-start contact-item">
+                            <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center me-3"
+                                style="height:40px; width:40px">
+                                <i class="bi bi-geo-alt text-white"></i>
+                            </div>
+                            <span class="text-light me-3">دمشق - ساحة الحافظة</span>
+                        </li>
+                        <li class="mb-3 d-flex align-items-start contact-item">
+                            <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center me-3"
+                                style="height:40px; width:40px">
+                                <i class="bi bi-telephone text-white"></i>
+                            </div>
+                            <span class="text-light me-3">963-999-999999+</span>
+                        </li>
+                        <li class="mb-3 d-flex align-items-start contact-item">
+                            <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center me-3"
+                                style="height:40px; width:40px">
+                                <i class="bi bi-envelope text-white"></i>
+                            </div>
+                            <span class="text-light me-3">info@syriaevents.sy</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- حقوق النشر والروابط الإضافية -->
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center py-4 mt-4 border-top">
+                <p class="mb-2 mb-md-0 text-light">حقوق النشر &copy; 2025 - جميع الحقوق محفوظة</p>
+                <ul class="list-unstyled d-flex">
+                    <li class="ms-0 ms-md-3">
+                        <a class="text-light text-decoration-none" href="#" aria-label="">سياسة الخصوصية</a>
+                    </li>
+                    <li class="ms-3">
+                        <a class="text-light text-decoration-none" href="#" aria-label="">شروط الخدمة</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Alert Overlay -->
+    <div class="alert-overlay" id="alertOverlay">
+        <div class="alert-container" id="alertContainer"></div>
+    </div>
+
+    <!-- زر العودة إلى الأعلى -->
+    <button class="back-to-top" id="backToTop" aria-label="العودة إلى الأعلى">
+        <i class="bi bi-chevron-up"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="./assets/js/script.js"></script>
+
+</body>
+
+</html>

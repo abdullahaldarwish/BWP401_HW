@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فعاليات سورية</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+
+<body>
+    <!-- شريط التنقل  -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" aria-label="شريط التنقل الرئيسي">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <i class="bi bi-calendar-event ms-2"></i> فعاليات سورية
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                aria-controls="offcanvasNavbar" aria-label="تبديل التنقل">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar"
+                aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
+                        <i class="bi bi-calendar-event me-2"></i> فعاليات سورية
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="home.html">
+                                <i class="bi bi-house-door me-1"></i> الرئيسية
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="events.html">
+                                <i class="bi bi-calendar3 me-1"></i> الفعاليات
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">
+                                <i class="bi bi-info-circle me-1"></i> من نحن
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">
+                                <i class="bi bi-telephone me-1"></i> تواصل معنا
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- قسم الرئيسي -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h1 class="display-4 fw-bold mb-4">اكتشف أفضل الفعاليات في سورية</h1>
+                    <p class="lead mb-4">من الحفلات الموسيقية إلى المؤتمرات، نحن نجعل مدينتك تتألق مع تجارب فريدة ولحظات
+                        لا تُنسى</p>
+                    <div class="d-flex flex-wrap justify-content-center gap-3">
+                        <a href="events.html" class="btn-main btn-main-lg">
+                            <i class="bi bi-search ms-2"></i> استكشف الفعاليات
+                        </a>
+                        <a href="#" class="btn-outline-light-custom btn-main-lg">
+                            <i class="bi bi-plus-circle ms-2"></i> أنشئ فعالية
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- عرض الشرائح  -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-title">الفعاليات المميزة</h2>
+            </div>
+            <div id="featuredEventsCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#featuredEventsCarousel" data-bs-slide-to="0" class="active"
+                        aria-current="true" aria-label="الشريحة 1"></button>
+                    <button type="button" data-bs-target="#featuredEventsCarousel" data-bs-slide-to="1"
+                        aria-label="الشريحة 2"></button>
+                    <button type="button" data-bs-target="#featuredEventsCarousel" data-bs-slide-to="2"
+                        aria-label="الشريحة 3"></button>
+                </div>
+                <div class="carousel-inner rounded-3">
+                    <div class="carousel-item active">
+                        <img src="./assets/images/hero1.avif"
+                            class="d-block w-100" alt="حفل موسيقي">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h3>مهرجان الموسيقى الدولي</h3>
+                            <p>احتفال بالموسيقى العالمية مع فنانين من مختلف أنحاء العالم</p>
+                            <a href="#" class="btn-main">احجز تذكرتك</a>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="./assets/images/hero.avif"
+                            class="d-block w-100" alt="معرض فني">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h3>معرض الفن المعاصر</h3>
+                            <p>استكشاف لأحدث الاتجاهات في الفن المعاصر من فنانين محليين وعالميين</p>
+                            <a href="#" class="btn-main">تعرف أكثر</a>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="./assets/images/hero2.avif"
+                            class="d-block w-100" alt="مؤتمر تكنولوجي">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h3>مؤتمر التكنولوجيا والابتكار</h3>
+                            <p>ملتقى للمبتكرين والخبراء في مجال التكنولوجيا والذكاء الاصطناعي</p>
+                            <a href="#" class="btn-main">سجل الآن</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- الاقسام -->
+    <section class="categories-section">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-title">استكشف الفعاليات حسب الأقسام</h2>
+            </div>
+            <p class="text-center text-muted mb-5">اكتشف مجموعة متنوعة من الفعاليات المثيرة في مختلف المجالات</p>
+
+            <div class="row">
+                <!-- قسم الرياضة -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="category-card">
+                        <div class="category-icon sports-bg">
+                            <i class="bi bi-trophy"></i>
+                        </div>
+                        <div class="category-content">
+                            <h4 class="category-title">الرياضة</h4>
+                            <p class="category-desc">استمتع بأحداث رياضية مثيرة، من مباريات محلية إلى بطولات عالمية.</p>
+                            <a href="#" class="btn-main btn-main-sm">
+                                استكشف الفعاليات <i class="bi bi-arrow-left me-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- قسم الرسم -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="category-card">
+                        <div class="category-icon art-bg">
+                            <i class="bi bi-palette"></i>
+                        </div>
+                        <div class="category-content">
+                            <h4 class="category-title">الرسم والفنون</h4>
+                            <p class="category-desc">اكتشف معارض فنية وورش عمل إبداعية مع فنانين موهوبين.</p>
+                            <a href="#" class="btn-main btn-main-sm">
+                                استكشف الفعاليات <i class="bi bi-arrow-left me-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- قسم الموسيقى -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="category-card">
+                        <div class="category-icon music-bg">
+                            <i class="bi bi-music-note-beamed"></i>
+                        </div>
+                        <div class="category-content">
+                            <h4 class="category-title">الموسيقى</h4>
+                            <p class="category-desc">استمع إلى حفلات موسيقية متنوعة تغطي مختلف الأذواق والأنماط.</p>
+                            <a href="#" class="btn-main btn-main-sm">
+                                استكشف الفعاليات <i class="bi bi-arrow-left me-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- قسم التكنولوجيا -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="category-card">
+                        <div class="category-icon tech-bg">
+                            <i class="bi bi-laptop"></i>
+                        </div>
+                        <div class="category-content">
+                            <h4 class="category-title">التكنولوجيا</h4>
+                            <p class="category-desc">شارك في مؤتمرات وهاكاثونات تكنولوجية مع خبراء الصناعة.</p>
+                            <a href="#" class="btn-main btn-main-sm">
+                                استكشف الفعاليات <i class="bi bi-arrow-left me-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- قسم الإبداع -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="category-card">
+                        <div class="category-icon creative-bg">
+                            <i class="bi bi-lightbulb"></i>
+                        </div>
+                        <div class="category-content">
+                            <h4 class="category-title">الإبداع</h4>
+                            <p class="category-desc">انضم إلى فعاليات إبداعية تشمل الكتابة والتصميم والابتكار.</p>
+                            <a href="#" class="btn-main btn-main-sm">
+                                استكشف الفعاليات <i class="bi bi-arrow-left me-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- قسم جميع الفعاليات -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="category-card">
+                        <div class="category-icon all-bg">
+                            <i class="bi bi-grid-3x3-gap"></i>
+                        </div>
+                        <div class="category-content">
+                            <h4 class="category-title">جميع الفعاليات</h4>
+                            <p class="category-desc">استعرض جميع الفعاليات المتاحة حسب تاريخها أو موقعها.</p>
+                            <a href="events.html" class="btn-main btn-main-sm">
+                                استكشف الفعاليات <i class="bi bi-arrow-left me-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الفعاليات القادمة -->
+    <section class="py-5">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-title">الفعاليات القادمة</h2>
+            </div>
+            <div class="row" id="eventViewMain">
+
+             
+            </div>
+            <div class="text-center mt-4">
+                <a href="events.html" class="btn-main">عرض جميع الفعاليات</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم النشرة البريدية -->
+    <section class="newsletter py-5 bg-light">
+        <div class="container">
+            <div class="col-lg-8 mx-auto">
+                <div class="text-center">
+                    <h2 class="section-title">ابقَ على اطلاع</h2>
+                    <p class="lead mb-4">اشترك في نشرتنا البريدية لتكون أول من يعرف عن الفعاليات القادمة والعروض
+                        الحصرية.
+                    </p>
+                </div>
+
+                <form class="newsletter-form mt-4 text-center">
+                    <input type="email" class="form-control form-control-lg" placeholder="بريدك الإلكتروني"
+                        aria-label="البريد الإلكتروني" required>
+                    <button class="btn-main w-100" type="submit">اشتراك</button>
+                    <p class="privacy-note">نحن نحترم خصوصيتك. لن نشارك بريدك الإلكتروني مع أي طرف ثالث.</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- التذييل  -->
+    <footer class="py-5 bg-dark text-white">
+        <div class="container">
+            <div class="row g-4">
+                <!-- قسم الموقع -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="h-100 d-flex flex-column">
+                        <h5 class="mb-3 fw-bold d-flex align-items-center">
+                            <i class="bi bi-calendar-event ms-2"></i> فعاليات سورية
+                        </h5>
+                        <p class="text-light mb-4 flex-grow-1">اكتشف واحضر أفضل الفعاليات في مدينتك. من الحفلات
+                            الموسيقية إلى المؤتمرات، نحن نجعل مدينتك تتألق مع تجارب فريدة ولحظات لا تُنسى.</p>
+                        <div class="d-flex gap-3">
+                            <a href="#"
+                                class="btn btn-outline-light d-flex align-items-center justify-content-center rounded-circle"
+                                style="height:40px; width:40px" aria-label="Facebook">
+                                <i class="bi bi-facebook"></i>
+                            </a>
+                            <a href="#"
+                                class="btn btn-outline-light d-flex align-items-center justify-content-center rounded-circle"
+                                style="height:40px; width:40px" aria-label="Twitter">
+                                <i class="bi bi-twitter"></i>
+                            </a>
+                            <a href="#"
+                                class="btn btn-outline-light d-flex align-items-center justify-content-center rounded-circle"
+                                style="height:40px; width:40px" aria-label="Instagram">
+                                <i class="bi bi-instagram"></i>
+                            </a>
+                            <a href="#"
+                                class="btn btn-outline-light d-flex align-items-center justify-content-center rounded-circle"
+                                style="height:40px; width:40px" aria-label="LinkedIn">
+                                <i class="bi bi-linkedin"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- قسم الروابط السريعة -->
+                <div class="col-lg-2 col-md-3 col-sm-6">
+                    <h5 class="mb-3 fw-bold">روابط سريعة</h5>
+                    <ul class="nav flex-column p-0">
+                        <li class="nav-item mb-2">
+                            <a href="home.html" class="nav-link p-0 text-light d-flex align-items-center">
+                                <i class="bi bi-chevron-left me-1 small"></i> الرئيسية
+                            </a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a href="events.html" class="nav-link p-0 text-light d-flex align-items-center">
+                                <i class="bi bi-chevron-left me-1 small"></i> الفعاليات
+                            </a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a href="about.html" class="nav-link p-0 text-light d-flex align-items-center">
+                                <i class="bi bi-chevron-left me-1 small"></i> من نحن
+                            </a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a href="contact.html" class="nav-link p-0 text-light d-flex align-items-center">
+                                <i class="bi bi-chevron-left me-1 small"></i> تواصل معنا
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- قسم الأقسام -->
+                <div class="col-lg-2 col-md-3 col-sm-6">
+                    <h5 class="mb-3 fw-bold">الاقسام</h5>
+                    <ul class="nav flex-column p-0">
+                        <li class="nav-item mb-2">
+                            <a href="#" class="nav-link p-0 text-light d-flex align-items-center">
+                                <i class="bi bi-chevron-left me-1 small"></i> الرياضة
+                            </a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a href="#" class="nav-link p-0 text-light d-flex align-items-center">
+                                <i class="bi bi-chevron-left me-1 small"></i> الرسم
+                            </a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a href="#" class="nav-link p-0 text-light d-flex align-items-center">
+                                <i class="bi bi-chevron-left me-1 small"></i> الموسيقى
+                            </a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a href="#" class="nav-link p-0 text-light d-flex align-items-center">
+                                <i class="bi bi-chevron-left me-1 small"></i> التكنلوجيا
+                            </a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a href="#" class="nav-link p-0 text-light d-flex align-items-center">
+                                <i class="bi bi-chevron-left me-1 small"></i> ابداع
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- قسم تواصل معنا -->
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="mb-3 fw-bold">تواصل معنا</h5>
+                    <ul class="list-unstyled p-0">
+                        <li class="mb-3 d-flex align-items-start contact-item">
+                            <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center me-3"
+                                style="height:40px; width:40px">
+                                <i class="bi bi-geo-alt text-white"></i>
+                            </div>
+                            <span class="text-light me-3">دمشق - ساحة الحافظة</span>
+                        </li>
+                        <li class="mb-3 d-flex align-items-start contact-item">
+                            <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center me-3"
+                                style="height:40px; width:40px">
+                                <i class="bi bi-telephone text-white"></i>
+                            </div>
+                            <span class="text-light me-3">963-999-999999+</span>
+                        </li>
+                        <li class="mb-3 d-flex align-items-start contact-item">
+                            <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center me-3"
+                                style="height:40px; width:40px">
+                                <i class="bi bi-envelope text-white"></i>
+                            </div>
+                            <span class="text-light me-3">info@syriaevents.sy</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- حقوق النشر والروابط الإضافية -->
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center py-4 mt-4 border-top">
+                <p class="mb-2 mb-md-0 text-light">حقوق النشر &copy; 2025 - جميع الحقوق محفوظة</p>
+                <ul class="list-unstyled d-flex">
+                    <li class="ms-0 ms-md-3">
+                        <a class="text-light text-decoration-none" href="#" aria-label="">سياسة الخصوصية</a>
+                    </li>
+                    <li class="ms-3">
+                        <a class="text-light text-decoration-none" href="#" aria-label="">شروط الخدمة</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- زر العودة إلى الأعلى -->
+    <button class="back-to-top" id="backToTop" aria-label="العودة إلى الأعلى">
+        <i class="bi bi-chevron-up"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="./assets/js/script.js"></script>
+</body>
+
+</html>
+
+
+
