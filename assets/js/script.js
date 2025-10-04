@@ -810,29 +810,28 @@ function initEventMainPage() {
     });
 }
 /* ربط الأقسام بالفعاليات*/
-    document.addEventListener('DOMContentLoaded', function() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const category = urlParams.get('category');
-  const categoryFilter = document.getElementById('categoryFilter');
+document.addEventListener('DOMContentLoaded', function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const category = urlParams.get('category');
+    const categoryFilter = document.getElementById('categoryFilter');
 
-  /
-  if (category && category !== 'all') {
-    categoryFilter.value = category;
-  } else {
-    categoryFilter.value = 'all';  
-  }
+    if (categoryFilter) {
+        if (category && category !== 'all') {
+            categoryFilter.value = category;
+        } else {
+            categoryFilter.value = 'all';
+        }
 
-  
-  categoryFilter.dispatchEvent(new Event('change'));
+        categoryFilter.dispatchEvent(new Event('change'));
 
-  
-  categoryFilter.addEventListener('change', function() {
-    if (categoryFilter.value === 'all') {
-      console.log("عرض جميع الفعاليات");
-    } else {
-      console.log("تم تصفية الفعاليات للـ: " + categoryFilter.value);
+        categoryFilter.addEventListener('change', function () {
+            if (categoryFilter.value === 'all') {
+                console.log("عرض جميع الفعاليات");
+            } else {
+                console.log("تم تصفية الفعاليات للـ: " + categoryFilter.value);
+            }
+        });
     }
-  });
 });
 
 function getRandomEvents(eventsData, num) {
@@ -842,11 +841,14 @@ function getRandomEvents(eventsData, num) {
 
 // إضافة فعاليات عشوائية إلى الشرائح
 document.addEventListener('DOMContentLoaded', function () {
-    const randomEvents = getRandomEvents(eventsData, 3);
     const carouselItemsContainer = document.getElementById('carouselItemsContainer');
+    if (!carouselItemsContainer) return;
 
+    const randomEvents = getRandomEvents(eventsData, 3);
+    
+    let carouselItem = '';
     randomEvents.forEach((event, index) => {
-        const isActive = index === 0 ? 'active' : ''; 
+        const isActive = index === 0 ? 'active' : '';
         const carouselItem = `
             <div class="carousel-item ${isActive}">
                 <img src="${event.image}" class="d-block w-100" alt="${event.title}">
