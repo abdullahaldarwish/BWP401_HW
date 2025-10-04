@@ -140,40 +140,6 @@
             </div>
         </div>
     </section>
-    
-    <!--ربط الاقسام بالفصفحة الئيسية بالفعاليات-->
-    <script>
-     window.onload = function() {
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const category = urlParams.get('category');
-
-    const categoryFilter = document.getElementById('categoryFilter');
-
-    if (category && category !== 'all') {
-
-      categoryFilter.value = category;
-    } else {
-     
-      categoryFilter.value = '';  
-    }
-
-    categoryFilter.dispatchEvent(new Event('change'));
-
-    
-    categoryFilter.addEventListener('change', function() {
-      if (categoryFilter.value === '') {
-        
-        console.log("عرض جميع الفعاليات");
-      } else {
-        
-        console.log("تم تصفية الفعاليات للـ: " + categoryFilter.value);
-      }
-    });
-    }
-   </script>
-
-
     <!-- التذييل  -->
     <footer class="py-5 bg-dark text-white">
         <div class="container">
