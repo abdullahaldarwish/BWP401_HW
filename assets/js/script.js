@@ -432,26 +432,6 @@ const eventsData = [
         ]
     }
 ];
-// إضافة فعاليات عشوائية إلى الشرائح
-document.addEventListener('DOMContentLoaded', function () {
-    const randomEvents = getRandomEvents(eventsData, 3);
-    const carouselItemsContainer = document.getElementById('carouselItemsContainer');
-
-    randomEvents.forEach((event, index) => {
-        const isActive = index === 0 ? 'active' : ''; 
-        const carouselItem = `
-            <div class="carousel-item ${isActive}">
-                <img src="${event.image}" class="d-block w-100" alt="${event.title}">
-                <div class="carousel-caption d-none d-md-block">
-                    <h3>${event.title}</h3>
-                    <p>${event.description}</p>
-                    <a href="eventdetails.html?id=${event.id}" class="btn-main">سجل الآن</a>
-                </div>
-            </div>
-        `;
-        carouselItemsContainer.innerHTML += carouselItem;
-    });
-});
 
 const categoryTranslations = {
     "Music": "موسيقى",
@@ -835,14 +815,17 @@ function initEventMainPage() {
   const category = urlParams.get('category');
   const categoryFilter = document.getElementById('categoryFilter');
 
+  /
   if (category && category !== 'all') {
     categoryFilter.value = category;
   } else {
     categoryFilter.value = 'all';  
   }
 
+  
   categoryFilter.dispatchEvent(new Event('change'));
 
+  
   categoryFilter.addEventListener('change', function() {
     if (categoryFilter.value === 'all') {
       console.log("عرض جميع الفعاليات");
@@ -850,6 +833,32 @@ function initEventMainPage() {
       console.log("تم تصفية الفعاليات للـ: " + categoryFilter.value);
     }
   });
+});
+
+function getRandomEvents(eventsData, num) {
+    const shuffled = [...eventsData].sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, num);
+}
+
+// إضافة فعاليات عشوائية إلى الشرائح
+document.addEventListener('DOMContentLoaded', function () {
+    const randomEvents = getRandomEvents(eventsData, 3);
+    const carouselItemsContainer = document.getElementById('carouselItemsContainer');
+
+    randomEvents.forEach((event, index) => {
+        const isActive = index === 0 ? 'active' : ''; 
+        const carouselItem = `
+            <div class="carousel-item ${isActive}">
+                <img src="${event.image}" class="d-block w-100" alt="${event.title}">
+                <div class="carousel-caption d-none d-md-block">
+                    <h3>${event.title}</h3>
+                    <p>${event.description}</p>
+                    <a href="eventdetails.html?id=${event.id}" class="btn-main">سجل الآن</a>
+                </div>
+            </div>
+        `;
+        carouselItemsContainer.innerHTML += carouselItem;
+    });
 });
 
 
