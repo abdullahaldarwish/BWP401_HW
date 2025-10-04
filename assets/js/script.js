@@ -809,6 +809,31 @@ function initEventMainPage() {
         eventViewMain.innerHTML += eventCard;
     });
 }
+/* ربط الأقسام بالفعاليات*/
+    document.addEventListener('DOMContentLoaded', function() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const category = urlParams.get('category');
+  const categoryFilter = document.getElementById('categoryFilter');
+
+  // إذا كانت الفئة موجودة في الـ URL، تعيين الفئة في الفلتر
+  if (category && category !== 'all') {
+    categoryFilter.value = category;
+  } else {
+    categoryFilter.value = 'all';  
+  }
+
+  // تنشيط الحدث عند تحميل الصفحة
+  categoryFilter.dispatchEvent(new Event('change'));
+
+  // الاستماع لتغيير الفلتر
+  categoryFilter.addEventListener('change', function() {
+    if (categoryFilter.value === 'all') {
+      console.log("عرض جميع الفعاليات");
+    } else {
+      console.log("تم تصفية الفعاليات للـ: " + categoryFilter.value);
+    }
+  });
+});
 
 
 /* ************************************************************************************************************************* */
