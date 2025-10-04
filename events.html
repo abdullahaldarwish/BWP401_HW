@@ -140,6 +140,38 @@
             </div>
         </div>
     </section>
+    
+    <!--ربط الاقسام بالفصفحة الئيسية بالفعاليات-->
+    <script>
+     window.onload = function() {
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const category = urlParams.get('category');
+
+    const categoryFilter = document.getElementById('categoryFilter');
+
+    if (category && category !== 'all') {
+
+      categoryFilter.value = category;
+    } else {
+     
+      categoryFilter.value = '';  
+    }
+
+    categoryFilter.dispatchEvent(new Event('change'));
+
+    
+    categoryFilter.addEventListener('change', function() {
+      if (categoryFilter.value === '') {
+        
+        console.log("عرض جميع الفعاليات");
+      } else {
+        
+        console.log("تم تصفية الفعاليات للـ: " + categoryFilter.value);
+      }
+    });
+    }
+   </script>
 
 
     <!-- التذييل  -->
@@ -212,28 +244,33 @@
                     <h5 class="mb-3 fw-bold">الاقسام</h5>
                     <ul class="nav flex-column p-0">
                         <li class="nav-item mb-2">
-                            <a href="#" class="nav-link p-0 text-light d-flex align-items-center">
+                            <a href="events.html?category=Sports" class="nav-link p-0 text-light d-flex align-items-center">
                                 <i class="bi bi-chevron-left me-1 small"></i> الرياضة
                             </a>
                         </li>
                         <li class="nav-item mb-2">
-                            <a href="#" class="nav-link p-0 text-light d-flex align-items-center">
+                            <a href="events.html?category=Art" class="nav-link p-0 text-light d-flex align-items-center">
                                 <i class="bi bi-chevron-left me-1 small"></i> الرسم
                             </a>
                         </li>
                         <li class="nav-item mb-2">
-                            <a href="#" class="nav-link p-0 text-light d-flex align-items-center">
+                            <a href="events.html?category=Music" class="nav-link p-0 text-light d-flex align-items-center">
                                 <i class="bi bi-chevron-left me-1 small"></i> الموسيقى
                             </a>
                         </li>
                         <li class="nav-item mb-2">
-                            <a href="#" class="nav-link p-0 text-light d-flex align-items-center">
+                            <a href="events.html?category=Technology" class="nav-link p-0 text-light d-flex align-items-center">
                                 <i class="bi bi-chevron-left me-1 small"></i> التكنلوجيا
                             </a>
                         </li>
                         <li class="nav-item mb-2">
-                            <a href="#" class="nav-link p-0 text-light d-flex align-items-center">
+                            <a href="events.html?category=Food" class="nav-link p-0 text-light d-flex align-items-center">
                                 <i class="bi bi-chevron-left me-1 small"></i> طعام
+                            </a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a href="events.html?category=Education" class="nav-link p-0 text-light d-flex align-items-center">
+                                <i class="bi bi-chevron-left me-1 small"></i> تعليم
                             </a>
                         </li>
                     </ul>
