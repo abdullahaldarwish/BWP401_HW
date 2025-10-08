@@ -1289,6 +1289,15 @@ footer {
   background: #212529;
 }
 
+[data-bs-theme="dark"] .event-info-card {
+  background: #1e1e1e;
+  color: #f8f9fa;
+}
+[data-bs-theme="dark"] .related-event-card {
+  background: #1e1e1e;
+  color: #f8f9fa;
+}
+
 /* switch */
 .form-check-input {
   cursor: pointer;

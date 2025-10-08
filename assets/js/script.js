@@ -819,7 +819,7 @@ function initEventDetailsPage() {
       col.innerHTML = `
                 <div class="card related-event-card h-100">
                     <img src="${event.image}" class="card-img-top" alt="${event.title}">
-                    <div class="card-body d-flex ">
+                    <div class="card-body d-flex related-event ">
                         <div>
                             <h5 class="card-title">${event.title}</h5>
                             <div class="related-event-meta mb-2">
