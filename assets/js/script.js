@@ -1070,3 +1070,110 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
+/* ************************************************************************************************************************* */
+/* ************************************************************************************************************************* */
+/* تبديل اللغات */
+
+const LANGUAGE_KEY = "site-language";
+
+const savedLanguage = localStorage.getItem(LANGUAGE_KEY);
+
+const initialLanguage = savedLanguage ? savedLanguage : "ar";
+
+document
+  .getElementById("lang-en")
+  .addEventListener("click", () => setLanguage("en"));
+document
+  .getElementById("lang-ar")
+  .addEventListener("click", () => setLanguage("ar"));
+
+function setLanguage(lang) {
+  localStorage.setItem(LANGUAGE_KEY, lang);
+  const elements = document.querySelectorAll("[data-key]");
+  elements.forEach((el) => {
+    const key = el.getAttribute("data-key");
+    el.textContent = translations[lang][key];
+  });
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  setLanguage(initialLanguage);
+});
+
+const translations = {
+  ar: {
+    home: "الرئيسية",
+    events: "الفعاليات",
+    about: "من نحن",
+    contact_us: "تواصل معنا",
+    title: "فعاليات سورية",
+    sy_act: "فعالية سورية",
+    discover_events: "استكشف الفعاليات",
+    discover_p_m:
+      "اكتشف مجموعة متنوعة من الفعاليات المثيرة في مختلف المجالات والمواقع",
+
+    events_filter: "تصفية الفعاليات",
+    search: "بحث",
+
+    section: "القسم",
+    all_sections: "جميع الأقسام",
+    music: "الموسيقى",
+    arts: "الفنون",
+    sports: "الرياضة",
+    food: "الطعام",
+    technology: "التكنولوجيا",
+    education: "التعليم",
+
+    date: "التاريخ",
+    location: "الموقع",
+    reset: "إعادة تعيين",
+
+    available_events: "الفعاليات المتاحة",
+
+    discover_p_f:
+      "اكتشف واحضر أفضل الفعاليات في مدينتك. من الحفلات الموسيقية إلى المؤتمرات، نحن نجعل مدينتك تتألق مع تجارب فريدة ولحظات لا تُنسى.",
+    quick_links: "روابط سريعة",
+    sections: "الأقسام",
+    damascus_address: "دمشق - ساحة الحافظة",
+    all_rights: "حقوق النشر &copy; 2025 - جميع الحقوق محفوظة",
+    privacy_policy: "سياسة الخصوصية",
+    terms_of_service: "شروط الخدمة",
+  },
+  en: {
+    home: "Home",
+    events: "Events",
+    about: "About Us",
+    contact_us: "Contact Us",
+    title: "Syrian Events",
+    sy_act: "Syrian Event",
+    discover_events: "Discover Events",
+    discover_p_m:
+      "Discover a variety of exciting events in different fields and locations.",
+
+    events_filter: "Event Filter",
+    search: "Search",
+
+    section: "Section",
+    all_sections: "All Sections",
+    music: "Music",
+    arts: "Arts",
+    sports: "Sports",
+    food: "Food",
+    technology: "Technology",
+    education: "Education",
+
+    date: "Date",
+    location: "Location",
+    reset: "Reset",
+
+    discover_p_f:
+      "Discover and attend the best events in your city. From concerts to conferences, we make your city shine with unique experiences and unforgettable moments.",
+    quick_links: "Quick Links",
+    sections: "Sections",
+    damascus_address: "Damascus - Al-Hafza Square",
+    all_rights: "Copyright &copy; 2025 - All Rights Reserved",
+    privacy_policy: "Privacy Policy",
+    terms_of_service: "Terms of Service",
+  },
+};
