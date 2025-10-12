@@ -1167,6 +1167,8 @@ const translations = {
     location: "Location",
     reset: "Reset",
 
+    available_events: "Available Events",
+
     discover_p_f:
       "Discover and attend the best events in your city. From concerts to conferences, we make your city shine with unique experiences and unforgettable moments.",
     quick_links: "Quick Links",
