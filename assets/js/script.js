@@ -40,9 +40,11 @@ function setLanguage(lang) {
 
 const translations = {
   ar: {
+    datetime: "التاريخ والوقت",
     home: "الرئيسية",
     events: "الفعاليات",
     eventdetails: "تفاصيل الفعالية",
+    showdetails: "عرض التفاصيل",
     about: "من نحن",
     contact_us: "تواصل معنا",
     title: "فعاليات سورية",
@@ -148,11 +150,17 @@ const translations = {
     privacy_policy: "سياسة الخصوصية",
     terms_of_service: "شروط الخدمة",
     rating: "تقييم",
+    bookticket: "احجز تذكرتك",
+    favorites: "أضف إلى المفضلة",
+    share: "شارك الفعالية",
+    relatedevents: "فعاليات ذات صلة",
   },
   en: {
+    datetime: "Date & Time",
     home: "Home",
     events: "Events",
     eventdetails: "Event Details",
+    showdetails: "Show Details",
     about: "About Us",
     contact_us: "Contact Us",
     title: "Syrian Events",
@@ -255,6 +263,10 @@ const translations = {
     privacy_policy: "Privacy Policy",
     terms_of_service: "Terms of Service",
     rating: "Rating",
+    bookticket: "Book Your Ticket",
+    favorites: "Add to Favorites",
+    share: "Share Event",
+    relatedevents: "Related Events",
   },
 };
 /* ************************************************************************************************************************* */
@@ -1236,22 +1248,22 @@ function initEventDetailsPage(lang) {
   }
 
   function displayEventDetails(event, lang) {
-    document.title = `${event.title[initialLanguage]} - فعاليات سورية`;
+    document.title = `${event.title[lang]} - فعاليات سورية`;
 
     const breadcrumbElement = document.getElementById("breadcrumbEventTitle");
     if (breadcrumbElement) {
-      breadcrumbElement.textContent = event.title[initialLanguage];
+      breadcrumbElement.textContent = event.title[lang];
     }
 
     const eventImage = document.getElementById("eventDetailImage");
     if (eventImage) {
       eventImage.src = event.image;
-      eventImage.alt = event.title[initialLanguage];
+      eventImage.alt = event.title[lang];
     }
 
     const eventTitle = document.getElementById("eventDetailTitle");
     if (eventTitle) {
-      eventTitle.textContent = event.title[lang || initialLanguage];
+      eventTitle.textContent = event.title[lang];
     }
 
     const eventRating = document.getElementById("eventRating");
@@ -1269,19 +1281,18 @@ function initEventDetailsPage(lang) {
 
     const eventLocation = document.getElementById("eventLocation");
     if (eventLocation) {
-      eventLocation.textContent = event.location[initialLanguage];
+      eventLocation.textContent = event.location[lang];
     }
 
     const eventCategory = document.getElementById("eventCategory");
     if (eventCategory) {
       eventCategory.textContent =
-        categoryTranslations[event.category][initialLanguage] ||
-        event.category[initialLanguage];
+        categoryTranslations[event.category][lang] || event.category[lang];
     }
 
     const eventDescription = document.getElementById("eventDescription");
     if (eventDescription) {
-      eventDescription.innerHTML = event.longDescription[initialLanguage];
+      eventDescription.innerHTML = event.longDescription[lang];
     }
 
     const eventMap = document.getElementById("eventMap");
@@ -1333,17 +1344,17 @@ function initEventDetailsPage(lang) {
       col.className = "col-md-4 mb-4";
       col.innerHTML = `
                 <div class="card related-event-card h-100">
-                    <img src="${event.image}" class="card-img-top" alt="${event.title[initialLanguage]}">
+                    <img src="${event.image}" class="card-img-top" alt="${event.title[lang]}">
                     <div class="card-body d-flex related-event ">
                         <div>
-                            <h5 class="card-title">${event.title[initialLanguage]}</h5>
+                            <h5 class="card-title">${event.title[lang]}</h5>
                             <div class="related-event-meta mb-2">
                                 <div><i class="bi bi-calendar-event"></i> ${event.date}</div>
-                                <div><i class="bi bi-geo-alt"></i> ${event.location[initialLanguage]}</div>
+                                <div><i class="bi bi-geo-alt"></i> ${event.location[lang]}</div>
                             </div>
                         </div>
                         
-                        <a href="eventdetails.html?id=${event.id}" class="btn btn-sm btn-main mt-auto">عرض التفاصيل</a>
+                        <a href="eventdetails.html?id=${event.id}" class="btn btn-sm btn-main mt-auto" data-key="showdetails">${translations[lang].showdetails}</a>
                     </div>
                 </div>
             `;

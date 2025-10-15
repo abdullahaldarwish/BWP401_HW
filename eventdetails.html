@@ -118,7 +118,7 @@
                         <div class="event-meta-item">
                             <i class="bi bi-calendar-event"></i>
                             <div>
-                                <strong>التاريخ والوقت</strong>
+                                <strong data-key="datetime">التاريخ والوقت</strong>
                                 <p id="eventDateTime" class="mb-0"></p>
                             </div>
                         </div>
@@ -126,7 +126,7 @@
                         <div class="event-meta-item">
                             <i class="bi bi-geo-alt"></i>
                             <div>
-                                <strong>الموقع</strong>
+                                <strong data-key="location">الموقع</strong>
                                 <p id="eventLocation" class="mb-0"></p>
                             </div>
                         </div>
@@ -134,15 +134,15 @@
                         <div class="event-meta-item">
                             <i class="bi bi-tag"></i>
                             <div>
-                                <strong>القسم</strong>
+                                <strong data-key="section">القسم</strong>
                                 <p id="eventCategory" class="mb-0"></p>
                             </div>
                         </div>
 
                         <div class="d-grid gap-2 mt-4">
-                            <button class="btn btn-main">احجز تذكرتك</button>
-                            <button class="btn btn-outline-primary">أضف إلى المفضلة</button>
-                            <button class="btn btn-outline-secondary">شارك الفعالية</button>
+                            <button class="btn btn-main" data-key="bookticket">احجز تذكرتك</button>
+                            <button class="btn btn-outline-primary"data-key="favorites">أضف إلى المفضلة</button>
+                            <button class="btn btn-outline-secondary" data-key="share">شارك الفعالية</button>
                         </div>
                     </div>
 
@@ -154,7 +154,7 @@
 
             <!-- فعاليات ذات صلة -->
             <div class="related-events">
-                <h3 class="section-title">فعاليات ذات صلة</h3>
+                <h3 class="section-title" data-key="relatedevents">فعاليات ذات صلة</h3>
                 <div class="row" id="relatedEvents">
                     <!-- سيتم ملء الفعاليات ذات الصلة هنا -->
                 </div>
