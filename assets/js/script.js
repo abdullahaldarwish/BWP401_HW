@@ -1,6 +1,6 @@
 /* ************************************************************************************************************************* */
 /* ************************************************************************************************************************* */
-/* تبديل اللغات */
+/* languages setting */
 
 const LANGUAGE_KEY = "site-language";
 
@@ -25,10 +25,24 @@ document
 
 function setLanguage(lang) {
   localStorage.setItem(LANGUAGE_KEY, lang);
+  if (lang == "ar") {
+    document.documentElement.lang = "ar";
+    document.documentElement.dir = "rtl";
+  }
+  if (lang == "en") {
+    document.documentElement.lang = "en";
+    document.documentElement.dir = "ltr";
+  }
+
   const elements = document.querySelectorAll("[data-key]");
   elements.forEach((el) => {
     const key = el.getAttribute("data-key");
     el.textContent = translations[lang][key];
+  });
+  const phelements = document.querySelectorAll("[data-placeholder]");
+  phelements.forEach((el) => {
+    const val = el.getAttribute("data-placeholder");
+    el.placeholder = phtranslations[lang][val];
   });
   if (window.location.href.includes("events.html")) {
     initEventsPage(lang);
@@ -36,7 +50,26 @@ function setLanguage(lang) {
   if (window.location.href.includes("eventdetails.html")) {
     initEventDetailsPage(lang);
   }
+  if (window.location.href.includes("home.html")) {
+    initEventMainPage(lang);
+  }
 }
+const phtranslations = {
+  ar: {
+    yourEmail: "بريدك الالكتروني",
+    enterFullName: "أدخل اسمك الكامل",
+    message: "اكتب رسالتك هنا...",
+    search: "ابحث عن فعالية...",
+    location: "اسم المدينة أو المنطقة",
+  },
+  en: {
+    yourEmail: "Your Email",
+    enterFullName: "Enter your full name",
+    message: "Write your message here...",
+    search: "search for an event...",
+    location: "Name of the city or region",
+  },
+};
 
 const translations = {
   ar: {
@@ -154,6 +187,10 @@ const translations = {
     favorites: "أضف إلى المفضلة",
     share: "شارك الفعالية",
     relatedevents: "فعاليات ذات صلة",
+    event: "فعالية",
+    signnow: "سجل الآن",
+    no_events: "لا توجد فعاليات متطابقة مع معايير البحث",
+    try_changing: "جرب تغيير معايير البحث أو التصفية",
   },
   en: {
     datetime: "Date & Time",
@@ -267,6 +304,10 @@ const translations = {
     favorites: "Add to Favorites",
     share: "Share Event",
     relatedevents: "Related Events",
+    event: "Event(s)",
+    signnow: "Sing now",
+    no_events: "There are no events matching your search criteria.",
+    try_changing: "Try changing your search or filter criteria.",
   },
 };
 /* ************************************************************************************************************************* */
@@ -1046,7 +1087,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   if (document.getElementById("eventViewMain")) {
-    initEventMainPage();
+    initEventMainPage(initialLanguage);
   }
 });
 
@@ -1068,8 +1109,8 @@ function initEventsPage(lang) {
       eventsContainer.innerHTML = `
                 <div class="no-events">
                     <i class="bi bi-calendar-x display-1 mb-3"></i>
-                    <h3 class="text-muted">لا توجد فعاليات متطابقة مع معايير البحث</h3>
-                    <p class="text-muted">جرب تغيير معايير البحث أو التصفية</p>
+                    <h3 class="text-muted">${translations[lang].no_events}</h3>
+                    <p class="text-muted">${translations[lang].try_changing}</p>
                 </div>
             `;
       updateEventsCount(0);
@@ -1120,8 +1161,10 @@ function initEventsPage(lang) {
                                     </small>
                                     <small class="text-muted">
                                         <i class="bi bi-eye me-1"></i> ${
-                                          event.reviews
-                                        } <div class="d-inline" data-key="rating">تقييم</div>
+                                          event.reviews +
+                                          " " +
+                                          translations[lang].rating
+                                        }
                                     </small>
                                 </div>
                                 <a href="eventdetails.html?id=${
@@ -1138,12 +1181,12 @@ function initEventsPage(lang) {
       eventsContainer.innerHTML += eventCard;
     });
 
-    updateEventsCount(eventsToShow.length);
+    updateEventsCount(eventsToShow.length, lang);
   }
 
-  function updateEventsCount(count) {
+  function updateEventsCount(count, lang) {
     if (eventsCount) {
-      eventsCount.textContent = `${count} فعالية`;
+      eventsCount.textContent = `${count + " " + translations[lang].event} `;
     }
   }
 
@@ -1199,11 +1242,11 @@ function initEventsPage(lang) {
     if (savedCategory && categoryFilter) {
       categoryFilter.value = savedCategory;
 
-      applyCategoryFilter(savedCategory);
+      applyCategoryFilter(savedCategory, lang);
     }
   }
 
-  function applyCategoryFilter(categoryValue) {
+  function applyCategoryFilter(categoryValue, lang) {
     if (!categoryValue) return;
 
     const searchTerm =
@@ -1214,8 +1257,8 @@ function initEventsPage(lang) {
 
     const filteredEvents = eventsData.filter((event) => {
       const matchesSearch =
-        event.title.toLowerCase().includes(searchTerm) ||
-        event.description.toLowerCase().includes(searchTerm);
+        event.title[lang].toLowerCase().includes(searchTerm) ||
+        event.description[lang].toLowerCase().includes(searchTerm);
       const matchesCategory = event.category === categoryValue;
       const matchesDate = !dateValue || event.date === dateValue;
       const matchesLocation =
@@ -1272,7 +1315,10 @@ function initEventDetailsPage(lang) {
 
     if (eventRating) eventRating.textContent = event.rating;
     if (eventStars) eventStars.innerHTML = generateStars(event.rating);
-    if (eventReviews) eventReviews.textContent = `(${event.reviews} تقييم)`;
+    if (eventReviews)
+      eventReviews.textContent = `(${
+        event.reviews + " " + translations[lang].rating
+      })`;
 
     const eventDateTime = document.getElementById("eventDateTime");
     if (eventDateTime) {
@@ -1319,7 +1365,7 @@ function initEventDetailsPage(lang) {
     }
   }
 
-  function displayRelatedEvents(currentEvent) {
+  function displayRelatedEvents(currentEvent, lang) {
     const relatedEventsContainer = document.getElementById("relatedEvents");
     if (!relatedEventsContainer) return;
 
@@ -1334,8 +1380,7 @@ function initEventDetailsPage(lang) {
       .slice(0, 3);
 
     if (relatedEvents.length === 0) {
-      relatedEventsContainer.innerHTML =
-        '<p class="text-muted text-center">لا توجد فعاليات ذات صلة</p>';
+      relatedEventsContainer.innerHTML = `<p class="text-muted text-center">${translations[lang][no_events]}</p>`;
       return;
     }
 
@@ -1354,7 +1399,7 @@ function initEventDetailsPage(lang) {
                             </div>
                         </div>
                         
-                        <a href="eventdetails.html?id=${event.id}" class="btn btn-sm btn-main mt-auto" data-key="showdetails">${translations[lang].showdetails}</a>
+                        <a href="eventdetails.html?id=${event.id}" class="btn btn-sm btn-main mt-auto">${translations[lang].showdetails}</a>
                     </div>
                 </div>
             `;
@@ -1364,10 +1409,10 @@ function initEventDetailsPage(lang) {
 
   displayEventDetails(event, lang);
 
-  displayRelatedEvents(event);
+  displayRelatedEvents(event, lang);
 }
 
-function initEventMainPage() {
+function initEventMainPage(lang) {
   const eventViewMain = document.getElementById("eventViewMain");
 
   if (!eventViewMain) return;
@@ -1383,18 +1428,20 @@ function initEventMainPage() {
                       categoryTranslations[event.category]
                     }</span>
                     <img src="${event.image}" class="card-img-top" alt="${
-      event.title
+      event.title[lang]
     }">
                     <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">${event.title}</h5>
+                        <h5 class="card-title">${event.title[lang]}</h5>
                         
                         <div class="d-flex align-items-center mb-2">
                             <i class="bi bi-geo-alt-fill text-muted me-2"></i>
-                            <small class="text-muted">${event.location}</small>
+                            <small class="text-muted">${
+                              event.location[lang]
+                            }</small>
                         </div>
                         
                         <p class="card-text flex-grow-1">${
-                          event.description
+                          event.description[lang]
                         }</p>
                         
                         <!-- التقييم بالنجوم -->
@@ -1467,11 +1514,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const isActive = index === 0 ? "active" : "";
     const carouselItem = `
             <div class="carousel-item ${isActive}">
-                <img src="${event.image}" class="d-block w-100" alt="${event.title}">
+                <img src="${event.image}" class="d-block w-100" alt="${event.title[initialLanguage]}">
                 <div class="carousel-caption d-none d-md-block">
-                    <h3>${event.title}</h3>
-                    <p>${event.description}</p>
-                    <a href="eventdetails.html?id=${event.id}" class="btn-main">سجل الآن</a>
+                    <h3>${event.title[initialLanguage]}</h3>
+                    <p>${event.description[initialLanguage]}</p>
+                    <a href="eventdetails.html?id=${event.id}" class="btn-main">${translations[initialLanguage].signnow}</a>
                 </div>
             </div>
         `;

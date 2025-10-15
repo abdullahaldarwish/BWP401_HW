@@ -136,7 +136,7 @@
                     <form id="contactForm" novalidate>
                         <div class="form-group">
                             <label for="name" data-key="fullname">الاسم الكامل</label>
-                            <input class="form-control" type="text" id="name" name="name" required placeholder="أدخل اسمك الكامل">
+                            <input class="form-control" type="text" id="name" name="name" data-placeholder="enterFullName" required placeholder="أدخل اسمك الكامل">
                         </div>
 
                         <div class="form-group">
@@ -146,11 +146,11 @@
 
                         <div class="form-group">
                             <label for="message" data-key="message">الرسالة</label>
-                            <textarea class="form-control" id="message" name="message" rows="5" required
+                            <textarea class="form-control" id="message" name="message" rows="5" required data-placeholder="message"
                                 placeholder="اكتب رسالتك هنا..."></textarea>
                         </div>
 
-                        <button type="submit" class="submit-btn" data-key="send_message">إرسال الرسالة</button>
+                        <button type="submit" class="submit-btn" data-key="send_message" >إرسال الرسالة</button>
                     </form>
                     <div id="formStatus" class="form-status"></div>
                 </div>
