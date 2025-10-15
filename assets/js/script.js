@@ -12,6 +12,10 @@ const savedLanguage = localStorage.getItem(LANGUAGE_KEY);
 
 const initialLanguage = savedLanguage ? savedLanguage : "ar";
 
+window.addEventListener("DOMContentLoaded", () => {
+  setLanguage(initialLanguage);
+});
+
 document
   .getElementById("lang-en")
   .addEventListener("click", () => setLanguage("en"));
@@ -26,12 +30,8 @@ function setLanguage(lang) {
     const key = el.getAttribute("data-key");
     el.textContent = translations[lang][key];
   });
-  location.reload();
+  initEventsPage(lang);
 }
-
-// window.addEventListener("DOMContentLoaded", () => {
-//   setLanguage(initialLanguage);
-// });
 
 const translations = {
   ar: {
@@ -1031,7 +1031,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-function initEventsPage() {
+function initEventsPage(lang) {
   const eventsContainer = document.getElementById("eventsContainer");
   const searchInput = document.getElementById("searchInput");
   const categoryFilter = document.getElementById("categoryFilter");
@@ -1139,8 +1139,8 @@ function initEventsPage() {
 
     filteredEvents = eventsData.filter((event) => {
       const matchesSearch =
-        event.title.toLowerCase().includes(searchTerm) ||
-        event.description.toLowerCase().includes(searchTerm);
+        event.title[lang]?.toLowerCase().includes(searchTerm) ||
+        event.description[lang]?.toLowerCase().includes(searchTerm);
       const matchesCategory =
         !categoryValue || event.category === categoryValue;
       const matchesDate = !dateValue || event.date === dateValue;
@@ -1150,7 +1150,7 @@ function initEventsPage() {
       return matchesSearch && matchesCategory && matchesDate && matchesLocation;
     });
 
-    displayEvents(filteredEvents, initialLanguage);
+    displayEvents(filteredEvents, lang);
   }
 
   if (resetFilters) {
@@ -1160,7 +1160,7 @@ function initEventsPage() {
       dateFilter.value = "";
       locationFilter.value = "";
       filteredEvents = [...eventsData];
-      displayEvents(filteredEvents, initialLanguage);
+      displayEvents(filteredEvents, lang);
       localStorage.removeItem("selectedCategory");
     });
   }
@@ -1205,7 +1205,7 @@ function initEventsPage() {
       return matchesSearch && matchesCategory && matchesDate && matchesLocation;
     });
 
-    displayEvents(filteredEvents, initialLanguage);
+    displayEvents(filteredEvents, lang);
   }
 
   if (searchInput) searchInput.addEventListener("input", filterEvents);
@@ -1213,7 +1213,7 @@ function initEventsPage() {
   if (dateFilter) dateFilter.addEventListener("change", filterEvents);
   if (locationFilter) locationFilter.addEventListener("input", filterEvents);
 
-  displayEvents(eventsData, initialLanguage);
+  displayEvents(eventsData, lang);
   applySavedCategory();
 }
 
