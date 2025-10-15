@@ -30,13 +30,19 @@ function setLanguage(lang) {
     const key = el.getAttribute("data-key");
     el.textContent = translations[lang][key];
   });
-  initEventsPage(lang);
+  if (window.location.href.includes("events.html")) {
+    initEventsPage(lang);
+  }
+  if (window.location.href.includes("eventdetails.html")) {
+    initEventDetailsPage(lang);
+  }
 }
 
 const translations = {
   ar: {
     home: "الرئيسية",
     events: "الفعاليات",
+    eventdetails: "تفاصيل الفعالية",
     about: "من نحن",
     contact_us: "تواصل معنا",
     title: "فعاليات سورية",
@@ -146,6 +152,7 @@ const translations = {
   en: {
     home: "Home",
     events: "Events",
+    eventdetails: "Event Details",
     about: "About Us",
     contact_us: "Contact Us",
     title: "Syrian Events",
@@ -1023,7 +1030,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   if (document.getElementById("eventDetailImage")) {
-    initEventDetailsPage();
+    initEventDetailsPage(initialLanguage);
   }
 
   if (document.getElementById("eventViewMain")) {
@@ -1217,7 +1224,7 @@ function initEventsPage(lang) {
   applySavedCategory();
 }
 
-function initEventDetailsPage() {
+function initEventDetailsPage(lang) {
   const urlParams = new URLSearchParams(window.location.search);
   const eventId = parseInt(urlParams.get("id"));
 
@@ -1228,7 +1235,7 @@ function initEventDetailsPage() {
     return;
   }
 
-  function displayEventDetails(event) {
+  function displayEventDetails(event, lang) {
     document.title = `${event.title[initialLanguage]} - فعاليات سورية`;
 
     const breadcrumbElement = document.getElementById("breadcrumbEventTitle");
@@ -1244,7 +1251,7 @@ function initEventDetailsPage() {
 
     const eventTitle = document.getElementById("eventDetailTitle");
     if (eventTitle) {
-      eventTitle.textContent = event.title[initialLanguage];
+      eventTitle.textContent = event.title[lang || initialLanguage];
     }
 
     const eventRating = document.getElementById("eventRating");
@@ -1344,7 +1351,7 @@ function initEventDetailsPage() {
     });
   }
 
-  displayEventDetails(event);
+  displayEventDetails(event, lang);
 
   displayRelatedEvents(event);
 }
