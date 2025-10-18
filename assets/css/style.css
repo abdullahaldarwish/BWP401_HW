@@ -1283,7 +1283,7 @@ footer {
   background-color: #212529 !important;
   color: #f8f9fa;
 }
-/* h and p need to update */
+
 [data-bs-theme="dark"] .category-card {
   background-color: #212529 !important;
   color: #f8f9fa;
@@ -1308,7 +1308,6 @@ footer {
   color: #f8f9fa;
 }
 
-/* check */
 [data-bs-theme="dark"] .contact-item a {
   color: #adb5bd;
 }
