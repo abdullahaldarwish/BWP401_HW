@@ -1425,7 +1425,7 @@ function initEventMainPage(lang) {
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="card event-card h-100">
                     <span class="category-badge badge bg-primary">${
-                      categoryTranslations[event.category]
+                      categoryTranslations[event.category][lang]
                     }</span>
                     <img src="${event.image}" class="card-img-top" alt="${
       event.title[lang]

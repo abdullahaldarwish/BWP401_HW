@@ -25,9 +25,24 @@ body {
 #fixedList {
   direction: ltr;
   position: fixed;
-  top: 37px;
+  top: 150px;
   left: 10px;
   display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #ecfdf5;
+  padding: 10px;
+  border-radius: 8px;
+}
+@media (max-width: 992px) {
+  #fixedList {
+    position: static;
+    background: transparent;
+  }
+}
+.flag {
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 .flag:hover {
   cursor: pointer;
@@ -1250,8 +1265,70 @@ footer {
 }
 
 /* dark mode */
+[data-bs-theme="dark"] body {
+  background-color: #19181a !important;
+  color: #f8f9fa;
+}
+
 [data-bs-theme="dark"] .bg-light {
   background-color: #1e1e1e !important;
+  color: #f8f9fa;
+}
+[data-bs-theme="dark"] .flex-column {
+  background-color: #212529 !important;
+  color: #f8f9fa;
+}
+
+[data-bs-theme="dark"] .related-event-card {
+  background-color: #212529 !important;
+  color: #f8f9fa;
+}
+/* h and p need to update */
+[data-bs-theme="dark"] .category-card {
+  background-color: #212529 !important;
+  color: #f8f9fa;
+}
+
+[data-bs-theme="dark"] .category-title {
+  background-color: #212529 !important;
+  color: #f8f9fa;
+}
+
+[data-bs-theme="dark"] .team-card {
+  background-color: #212529 !important;
+  color: #f8f9fa;
+}
+
+[data-bs-theme="dark"] .team-name {
+  color: #f8f9fa;
+}
+
+[data-bs-theme="dark"] .contact-section {
+  background: #1e1e1e;
+  color: #f8f9fa;
+}
+
+/* check */
+[data-bs-theme="dark"] .contact-item a {
+  color: #adb5bd;
+}
+
+[data-bs-theme="dark"] .mission-section {
+  background-color: #1e1e1e;
+  color: #f8f9fa;
+}
+
+[data-bs-theme="dark"] .events-section {
+  background-color: #121212;
+  color: #f8f9fa;
+}
+[data-bs-theme="dark"] .filter-section {
+  background-color: #1e1e1e;
+  color: #f8f9fa;
+}
+
+[data-bs-theme="dark"] .team-section {
+  background: #121212;
   color: #f8f9fa;
 }
 
@@ -1264,31 +1341,11 @@ footer {
   color: #fff;
 }
 
-[data-bs-theme="dark"] .events-section {
-  background-color: #121212;
-  color: #f8f9fa;
-}
-[data-bs-theme="dark"] .filter-section {
-  background-color: #1e1e1e;
-  color: #f8f9fa;
-}
-
-[data-bs-theme="dark"] .mission-section {
-  background-color: #1e1e1e;
-  color: #f8f9fa;
-}
-
-[data-bs-theme="dark"] .contact-section {
+[data-bs-theme="dark"] .event-info-card {
   background: #1e1e1e;
   color: #f8f9fa;
 }
-[data-bs-theme="dark"] .team-section {
-  background: #121212;
-  color: #f8f9fa;
-}
-[data-bs-theme="dark"] .contact-item a {
-  color: #adb5bd;
-}
+
 [data-bs-theme="dark"] .form-group label {
   color: #adb5bd;
 }
@@ -1299,22 +1356,14 @@ footer {
   background: #212529;
 }
 
-[data-bs-theme="dark"] .event-info-card {
-  background: #1e1e1e;
-  color: #f8f9fa;
-}
-[data-bs-theme="dark"] .related-event-card {
-  background: #1e1e1e;
-  color: #f8f9fa;
+/* switch */
+.iconWrapper {
+  padding: 0px 16px 0px 0px;
+  margin: 0px;
 }
 
-/* switch */
 .form-check-input {
-  cursor: pointer;
-  width: 3em !important;
-  height: 1.7em !important;
-  background-size: 1.5em 1.5em !important;
-  transition: all 0.3s ease;
+  display: none;
 }
 
 /* the icon of the switch */
