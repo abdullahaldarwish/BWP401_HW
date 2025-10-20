@@ -44,6 +44,8 @@ function setLanguage(lang) {
     const val = el.getAttribute("data-placeholder");
     el.placeholder = phtranslations[lang][val];
   });
+
+  
   if (window.location.href.includes("events.html")) {
     initEventsPage(lang);
   }
@@ -52,6 +54,7 @@ function setLanguage(lang) {
   }
   if (window.location.href.includes("home.html")) {
     initEventMainPage(lang);
+    renderCarousel(lang); 
   }
 }
 const phtranslations = {
@@ -1079,7 +1082,7 @@ function generateStars(rating) {
 
 document.addEventListener("DOMContentLoaded", function () {
   if (document.getElementById("eventsContainer")) {
-    initEventsPage();
+    initEventsPage(initialLanguage);
   }
 
   if (document.getElementById("eventDetailImage")) {
@@ -1092,6 +1095,9 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function initEventsPage(lang) {
+  
+  if (!lang) lang = initialLanguage;
+
   const eventsContainer = document.getElementById("eventsContainer");
   const searchInput = document.getElementById("searchInput");
   const categoryFilter = document.getElementById("categoryFilter");
@@ -1102,18 +1108,18 @@ function initEventsPage(lang) {
 
   let filteredEvents = [...eventsData];
 
-  function displayEvents(eventsToShow = eventsData, lang = initialLanguage) {
+  function displayEvents(eventsToShow = eventsData, langParam = lang) {
     eventsContainer.innerHTML = "";
 
     if (eventsToShow.length === 0) {
       eventsContainer.innerHTML = `
                 <div class="no-events">
                     <i class="bi bi-calendar-x display-1 mb-3"></i>
-                    <h3 class="text-muted">${translations[lang].no_events}</h3>
-                    <p class="text-muted">${translations[lang].try_changing}</p>
+                    <h3 class="text-muted">${translations[langParam].no_events}</h3>
+                    <p class="text-muted">${translations[langParam].try_changing}</p>
                 </div>
             `;
-      updateEventsCount(0);
+      updateEventsCount(0, langParam);
       return;
     }
 
@@ -1122,24 +1128,24 @@ function initEventsPage(lang) {
                 <div class=" mb-4">
                     <div class="card event-card h-100">
                         <span class="category-badge badge bg-primary">${
-                          categoryTranslations[event.category][lang]
+                          categoryTranslations[event.category][langParam]
                         }</span>
                         <img src="${event.image}" class="card-img-top" alt="${
-        event.title[lang]
+        event.title[langParam]
       }">
                         <div class="card-body d-flex flex-column">
-                            <h5 class="card-title">${event.title[lang]}</h5>
+                            <h5 class="card-title">${event.title[langParam]}</h5>
 
                             <!-- الموقع -->
                             <div class="d-flex align-items-center mb-2">
                                 <i class="bi bi-geo-alt-fill text-muted me-2"></i>
                                 <small class="text-muted">${
-                                  event.location[lang]
+                                  event.location[langParam]
                                 }</small>
                             </div>
 
                             <p class="card-text flex-grow-1">${
-                              event.description[lang]
+                              event.description[langParam]
                             }</p>
 
                             <!-- التقييم بالنجوم -->
@@ -1163,14 +1169,14 @@ function initEventsPage(lang) {
                                         <i class="bi bi-eye me-1"></i> ${
                                           event.reviews +
                                           " " +
-                                          translations[lang].rating
+                                          translations[langParam].rating
                                         }
                                     </small>
                                 </div>
                                 <a href="eventdetails.html?id=${
                                   event.id
                                 }" class="btn-main btn-main-sm">${
-        lang === "ar" ? "التفاصيل" : "Details"
+        langParam === "ar" ? "التفاصيل" : "Details"
       }</a>
                             </div>
                         </div>
@@ -1181,33 +1187,38 @@ function initEventsPage(lang) {
       eventsContainer.innerHTML += eventCard;
     });
 
-    updateEventsCount(eventsToShow.length, lang);
+    updateEventsCount(eventsToShow.length, langParam);
   }
 
-  function updateEventsCount(count, lang) {
+  function updateEventsCount(count, langParam) {
     if (eventsCount) {
-      eventsCount.textContent = `${count + " " + translations[lang].event} `;
+      eventsCount.textContent = `${count + " " + translations[langParam].event} `;
     }
   }
 
   function filterEvents() {
-    const searchTerm = searchInput.value.toLowerCase();
-    const categoryValue = categoryFilter.value;
-    const dateValue = dateFilter.value;
-    const locationValue = locationFilter.value.toLowerCase();
+    const searchTerm = (searchInput?.value || "").toLowerCase();
+    const categoryValue = categoryFilter?.value || "";
+    const dateValue = dateFilter?.value || "";
+    const locationValue = (locationFilter?.value || "").toLowerCase();
     if (categoryValue) {
       saveSelectedCategory(categoryValue);
     }
 
     filteredEvents = eventsData.filter((event) => {
       const matchesSearch =
-        event.title[lang]?.toLowerCase().includes(searchTerm) ||
-        event.description[lang]?.toLowerCase().includes(searchTerm);
+        (event.title[lang]?.toLowerCase().includes(searchTerm) ||
+          event.description[lang]?.toLowerCase().includes(searchTerm)) ||
+        (event.title?.ar?.toLowerCase().includes(searchTerm) || event.title?.en?.toLowerCase().includes(searchTerm));
+      // matchesCategory
       const matchesCategory =
         !categoryValue || event.category === categoryValue;
       const matchesDate = !dateValue || event.date === dateValue;
       const matchesLocation =
-        !locationValue || event.location.toLowerCase().includes(locationValue);
+        !locationValue ||
+        (event.location[lang] || event.location.ar || event.location.en)
+          .toLowerCase()
+          .includes(locationValue);
 
       return matchesSearch && matchesCategory && matchesDate && matchesLocation;
     });
@@ -1217,10 +1228,10 @@ function initEventsPage(lang) {
 
   if (resetFilters) {
     resetFilters.addEventListener("click", function () {
-      searchInput.value = "";
-      categoryFilter.value = "";
-      dateFilter.value = "";
-      locationFilter.value = "";
+      if (searchInput) searchInput.value = "";
+      if (categoryFilter) categoryFilter.value = "";
+      if (dateFilter) dateFilter.value = "";
+      if (locationFilter) locationFilter.value = "";
       filteredEvents = [...eventsData];
       displayEvents(filteredEvents, lang);
       localStorage.removeItem("selectedCategory");
@@ -1237,16 +1248,16 @@ function initEventsPage(lang) {
 
   function applySavedCategory() {
     const savedCategory = getSelectedCategory();
-    const categoryFilter = document.getElementById("categoryFilter");
+    const categoryFilterEl = document.getElementById("categoryFilter");
 
-    if (savedCategory && categoryFilter) {
-      categoryFilter.value = savedCategory;
+    if (savedCategory && categoryFilterEl) {
+      categoryFilterEl.value = savedCategory;
 
       applyCategoryFilter(savedCategory, lang);
     }
   }
 
-  function applyCategoryFilter(categoryValue, lang) {
+  function applyCategoryFilter(categoryValue, langParam) {
     if (!categoryValue) return;
 
     const searchTerm =
@@ -1255,19 +1266,19 @@ function initEventsPage(lang) {
     const locationValue =
       document.getElementById("locationFilter")?.value.toLowerCase() || "";
 
-    const filteredEvents = eventsData.filter((event) => {
+    const filteredEventsLocal = eventsData.filter((event) => {
       const matchesSearch =
-        event.title[lang].toLowerCase().includes(searchTerm) ||
-        event.description[lang].toLowerCase().includes(searchTerm);
+        event.title[langParam].toLowerCase().includes(searchTerm) ||
+        event.description[langParam].toLowerCase().includes(searchTerm);
       const matchesCategory = event.category === categoryValue;
       const matchesDate = !dateValue || event.date === dateValue;
       const matchesLocation =
-        !locationValue || event.location.toLowerCase().includes(locationValue);
+        !locationValue || event.location[langParam].toLowerCase().includes(locationValue);
 
       return matchesSearch && matchesCategory && matchesDate && matchesLocation;
     });
 
-    displayEvents(filteredEvents, lang);
+    displayEvents(filteredEventsLocal, langParam);
   }
 
   if (searchInput) searchInput.addEventListener("input", filterEvents);
@@ -1280,6 +1291,8 @@ function initEventsPage(lang) {
 }
 
 function initEventDetailsPage(lang) {
+  if (!lang) lang = initialLanguage;
+
   const urlParams = new URLSearchParams(window.location.search);
   const eventId = parseInt(urlParams.get("id"));
 
@@ -1290,23 +1303,23 @@ function initEventDetailsPage(lang) {
     return;
   }
 
-  function displayEventDetails(event, lang) {
-    document.title = `${event.title[lang]} - فعاليات سورية`;
+  function displayEventDetails(event, langParam) {
+    document.title = `${event.title[langParam]} - فعاليات سورية`;
 
     const breadcrumbElement = document.getElementById("breadcrumbEventTitle");
     if (breadcrumbElement) {
-      breadcrumbElement.textContent = event.title[lang];
+      breadcrumbElement.textContent = event.title[langParam];
     }
 
     const eventImage = document.getElementById("eventDetailImage");
     if (eventImage) {
       eventImage.src = event.image;
-      eventImage.alt = event.title[lang];
+      eventImage.alt = event.title[langParam];
     }
 
     const eventTitle = document.getElementById("eventDetailTitle");
     if (eventTitle) {
-      eventTitle.textContent = event.title[lang];
+      eventTitle.textContent = event.title[langParam];
     }
 
     const eventRating = document.getElementById("eventRating");
@@ -1317,7 +1330,7 @@ function initEventDetailsPage(lang) {
     if (eventStars) eventStars.innerHTML = generateStars(event.rating);
     if (eventReviews)
       eventReviews.textContent = `(${
-        event.reviews + " " + translations[lang].rating
+        event.reviews + " " + translations[langParam].rating
       })`;
 
     const eventDateTime = document.getElementById("eventDateTime");
@@ -1327,18 +1340,18 @@ function initEventDetailsPage(lang) {
 
     const eventLocation = document.getElementById("eventLocation");
     if (eventLocation) {
-      eventLocation.textContent = event.location[lang];
+      eventLocation.textContent = event.location[langParam];
     }
 
     const eventCategory = document.getElementById("eventCategory");
     if (eventCategory) {
       eventCategory.textContent =
-        categoryTranslations[event.category][lang] || event.category[lang];
+        categoryTranslations[event.category][langParam] || event.category[langParam];
     }
 
     const eventDescription = document.getElementById("eventDescription");
     if (eventDescription) {
-      eventDescription.innerHTML = event.longDescription[lang];
+      eventDescription.innerHTML = event.longDescription[langParam];
     }
 
     const eventMap = document.getElementById("eventMap");
@@ -1365,7 +1378,7 @@ function initEventDetailsPage(lang) {
     }
   }
 
-  function displayRelatedEvents(currentEvent, lang) {
+  function displayRelatedEvents(currentEvent, langParam) {
     const relatedEventsContainer = document.getElementById("relatedEvents");
     if (!relatedEventsContainer) return;
 
@@ -1380,7 +1393,7 @@ function initEventDetailsPage(lang) {
       .slice(0, 3);
 
     if (relatedEvents.length === 0) {
-      relatedEventsContainer.innerHTML = `<p class="text-muted text-center">${translations[lang][no_events]}</p>`;
+      relatedEventsContainer.innerHTML = `<p class="text-muted text-center">${translations[langParam].no_events}</p>`;
       return;
     }
 
@@ -1389,17 +1402,17 @@ function initEventDetailsPage(lang) {
       col.className = "col-md-4 mb-4";
       col.innerHTML = `
                 <div class="card related-event-card h-100">
-                    <img src="${event.image}" class="card-img-top" alt="${event.title[lang]}">
+                    <img src="${event.image}" class="card-img-top" alt="${event.title[langParam]}">
                     <div class="card-body d-flex related-event ">
                         <div>
-                            <h5 class="card-title">${event.title[lang]}</h5>
+                            <h5 class="card-title">${event.title[langParam]}</h5>
                             <div class="related-event-meta mb-2">
                                 <div><i class="bi bi-calendar-event"></i> ${event.date}</div>
-                                <div><i class="bi bi-geo-alt"></i> ${event.location[lang]}</div>
+                                <div><i class="bi bi-geo-alt"></i> ${event.location[langParam]}</div>
                             </div>
                         </div>
                         
-                        <a href="eventdetails.html?id=${event.id}" class="btn btn-sm btn-main mt-auto">${translations[lang].showdetails}</a>
+                        <a href="eventdetails.html?id=${event.id}" class="btn btn-sm btn-main mt-auto">${translations[langParam].showdetails}</a>
                     </div>
                 </div>
             `;
@@ -1413,6 +1426,8 @@ function initEventDetailsPage(lang) {
 }
 
 function initEventMainPage(lang) {
+  if (!lang) lang = initialLanguage;
+
   const eventViewMain = document.getElementById("eventViewMain");
 
   if (!eventViewMain) return;
@@ -1458,9 +1473,7 @@ function initEventMainPage(lang) {
                                   event.date
                                 }
                             </small>
-                            <a href="eventdetails.html?id=${
-                              event.id
-                            }" class="btn-main btn-main-sm">التفاصيل</a>
+                            <a href="eventdetails.html?id=${event.id}" class="btn-main btn-main-sm">${translations[lang].showdetails}</a>
                         </div>
                     </div>
                 </div>
@@ -1479,8 +1492,12 @@ document.addEventListener("DOMContentLoaded", function () {
   if (categoryFilter) {
     if (category && category !== "all") {
       categoryFilter.value = category;
+      // حفظ القسم المختار في localStorage
+      localStorage.setItem("selectedCategory", category);
     } else {
       categoryFilter.value = "all";
+      // إذا تم تحديد all نحذف القيمة القديمة من localStorage
+      localStorage.removeItem("selectedCategory");
     }
 
     categoryFilter.dispatchEvent(new Event("change"));
@@ -1500,31 +1517,37 @@ function getRandomEvents(eventsData, num) {
   return shuffled.slice(0, num);
 }
 
-// إضافة فعاليات عشوائية إلى الشرائح
-document.addEventListener("DOMContentLoaded", function () {
+/* -------------------------
+   دالة عرض الشرائح (Carousel) بحسب اللغة
+   ------------------------- */
+function renderCarousel(lang) {
+  if (!lang) lang = initialLanguage;
+
   const carouselItemsContainer = document.getElementById(
     "carouselItemsContainer"
   );
   if (!carouselItemsContainer) return;
 
+  // تفريغ المحتوى القديم قبل إعادة الإنشاء
+  carouselItemsContainer.innerHTML = "";
+
   const randomEvents = getRandomEvents(eventsData, 3);
 
-  let carouselItem = "";
   randomEvents.forEach((event, index) => {
     const isActive = index === 0 ? "active" : "";
     const carouselItem = `
             <div class="carousel-item ${isActive}">
-                <img src="${event.image}" class="d-block w-100" alt="${event.title[initialLanguage]}">
+                <img src="${event.image}" class="d-block w-100" alt="${event.title[lang]}">
                 <div class="carousel-caption d-none d-md-block">
-                    <h3>${event.title[initialLanguage]}</h3>
-                    <p>${event.description[initialLanguage]}</p>
-                    <a href="eventdetails.html?id=${event.id}" class="btn-main">${translations[initialLanguage].signnow}</a>
+                    <h3>${event.title[lang]}</h3>
+                    <p>${event.description[lang]}</p>
+                    <a href="eventdetails.html?id=${event.id}" class="btn-main">${translations[lang].signnow}</a>
                 </div>
             </div>
         `;
     carouselItemsContainer.innerHTML += carouselItem;
   });
-});
+}
 
 /* ************************************************************************************************************************* */
 /* ************************************************************************************************************************* */
