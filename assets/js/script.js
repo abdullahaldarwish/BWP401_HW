@@ -45,7 +45,7 @@ function setLanguage(lang) {
     el.placeholder = phtranslations[lang][val];
   });
 
-  
+  // تأكد أن تَمرّر اللغة لكل صفحة عند التهيئة
   if (window.location.href.includes("events.html")) {
     initEventsPage(lang);
   }
@@ -54,7 +54,7 @@ function setLanguage(lang) {
   }
   if (window.location.href.includes("home.html")) {
     initEventMainPage(lang);
-    renderCarousel(lang); 
+    renderCarousel(lang); // <-- استدعاء إعادة رسم الشرائح عند تغيير اللغة
   }
 }
 const phtranslations = {
@@ -1095,7 +1095,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function initEventsPage(lang) {
-  
+  // تأكد أن lang ليس undefined
   if (!lang) lang = initialLanguage;
 
   const eventsContainer = document.getElementById("eventsContainer");
@@ -1130,9 +1130,7 @@ function initEventsPage(lang) {
                         <span class="category-badge badge bg-primary">${
                           categoryTranslations[event.category][langParam]
                         }</span>
-                        <img src="${event.image}" class="card-img-top" alt="${
-        event.title[langParam]
-      }">
+                        <img src="${event.image}" class="card-img-top event-image" alt="${event.title[langParam]}">
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title">${event.title[langParam]}</h5>
 
@@ -1175,9 +1173,7 @@ function initEventsPage(lang) {
                                 </div>
                                 <a href="eventdetails.html?id=${
                                   event.id
-                                }" class="btn-main btn-main-sm">${
-        langParam === "ar" ? "التفاصيل" : "Details"
-      }</a>
+                                }" class="btn-main btn-main-sm">${langParam === "ar" ? "التفاصيل" : "Details" }</a>
                             </div>
                         </div>
                     </div>
@@ -1402,7 +1398,7 @@ function initEventDetailsPage(lang) {
       col.className = "col-md-4 mb-4";
       col.innerHTML = `
                 <div class="card related-event-card h-100">
-                    <img src="${event.image}" class="card-img-top" alt="${event.title[langParam]}">
+                   <img src="${event.image}" class="related-avatar mx-auto d-block mb-3" alt="${event.title[langParam]}">
                     <div class="card-body d-flex related-event ">
                         <div>
                             <h5 class="card-title">${event.title[langParam]}</h5>
@@ -1442,9 +1438,7 @@ function initEventMainPage(lang) {
                     <span class="category-badge badge bg-primary">${
                       categoryTranslations[event.category][lang]
                     }</span>
-                    <img src="${event.image}" class="card-img-top" alt="${
-      event.title[lang]
-    }">
+                   <img src="${event.image}" class="card-img-top event-image" alt="${event.title[lang]}">
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">${event.title[lang]}</h5>
                         
@@ -1496,7 +1490,7 @@ document.addEventListener("DOMContentLoaded", function () {
       localStorage.setItem("selectedCategory", category);
     } else {
       categoryFilter.value = "all";
-      // إذا تم تحديد all نحذف القيمة القديمة من localStorage
+      // إذا تم تحديد all حذف القيمة القديمة من localStorage
       localStorage.removeItem("selectedCategory");
     }
 
