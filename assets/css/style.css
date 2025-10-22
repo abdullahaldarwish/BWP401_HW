@@ -30,7 +30,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  background: #ecfdf5;
+  background: #0d6efd;
   padding: 10px;
   border-radius: 8px;
 }
@@ -378,6 +378,7 @@ footer {
 
 .event-meta-item i {
   margin-left: 10px;
+  margin-right: 10px;
   color: var(--primary-color);
   font-size: 1.2rem;
 }
