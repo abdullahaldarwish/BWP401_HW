@@ -37,7 +37,7 @@ function setLanguage(lang) {
   const elements = document.querySelectorAll("[data-key]");
   elements.forEach((el) => {
     const key = el.getAttribute("data-key");
-    el.textContent = translations[lang][key];
+    el.innerHTML = translations[lang][key];
   });
   const phelements = document.querySelectorAll("[data-placeholder]");
   phelements.forEach((el) => {
