@@ -316,9 +316,9 @@ footer {
 }
 
 /* تفاصيل الفعالية */
-.event-details-section {
+/* .event-details-section {
   padding: 500px 0;
-}
+} */
 
 .event-hero {
   background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
